@@ -4,3 +4,9 @@
 [submodule "UpdateSubtitle"]
 	path = UpdateSubtitle
 	url = git@github.com:luckykefu/update-subtitile.git
+[submodule "AudioProcess"]
+	path = AudioProcess
+	url = git@github.com:luckykefu/AudioProcess.git
+[submodule "Audio2TextWhisper"]
+	path = Audio2TextWhisper
+	url = git@github.com:luckykefu/Audio2TextWhisperWebUI.git

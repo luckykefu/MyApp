@@ -5,6 +5,8 @@
 /env/
 /build/
 /dist/
+/whisper_models/
+/output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
