@@ -1,0 +1,3 @@
+[submodule "AutoPublishVideo"]
+	path = AutoPublishVideo
+	url = git@github.com:luckykefu/autopublish.git
