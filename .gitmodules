@@ -1,3 +1,6 @@
 [submodule "AutoPublishVideo"]
 	path = AutoPublishVideo
 	url = git@github.com:luckykefu/autopublish.git
+[submodule "UpdateSubtitle"]
+	path = UpdateSubtitle
+	url = git@github.com:luckykefu/update-subtitile.git
