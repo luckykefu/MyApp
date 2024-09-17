@@ -55,6 +55,7 @@ def git_auto_push(git_repo_paths=None, git_message=None, git_username=None, git_
             logger.info(f"Processing repository info: {repo_path}")
             # Split path and branch
             path, branch =  repo_path.split(" ")
+            path = os.path.abspath(path)
             logger.info(f"Processing repository '{path}' with branch '{branch}'")
 
             # Path process
