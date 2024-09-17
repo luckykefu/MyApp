@@ -12,10 +12,7 @@ import os
 
 logger = get_logger(__name__)
 
-# 获取脚本所在目录的绝对路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# 更改当前工作目录
 os.chdir(script_dir)
 
 def main():
