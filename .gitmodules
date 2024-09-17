@@ -10,3 +10,6 @@
 [submodule "Audio2TextWhisper"]
 	path = Audio2TextWhisper
 	url = git@github.com:luckykefu/Audio2TextWhisperWebUI.git
+[submodule "GitAutoPush"]
+	path = GitAutoPush
+	url = git@github.com:luckykefu/autogit.git
