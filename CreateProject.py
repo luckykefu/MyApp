@@ -381,7 +381,7 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     # Example usage:
-    project_name = "YTBDL"
+    project_name = "ImgProcess"
     author_name = "Luckykefu"
     email = "3124568493@qq.com"
 

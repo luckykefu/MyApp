@@ -16,3 +16,6 @@
 [submodule "YTBDL"]
 	path = YTBDL
 	url = git@github.com:luckykefu/ytb-dlWebUI.git
+[submodule "ImgProcess"]
+	path = ImgProcess
+	url = git@github.com:luckykefu/ImgProcess.git

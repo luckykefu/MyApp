@@ -11,14 +11,13 @@ from src.log import get_logger
 
 logger = get_logger(__name__)
 
+
 def main():
 
     # Define the interface
     with gr.Blocks() as demo:
-        with gr.TabItem("ImgProcess"):
-            gr.Markdown("## ImgProcess")
+        gr.Markdown("## MyApp")
 
-            
     # Launch the interface
     parser = argparse.ArgumentParser(description="Demo")
     parser.add_argument(
@@ -35,6 +34,6 @@ def main():
         show_api=False,
     )
 
+
 if __name__ == "__main__":
     main()
-
