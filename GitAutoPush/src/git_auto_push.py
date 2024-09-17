@@ -56,6 +56,9 @@ def git_auto_push(git_repo_paths=None, git_message=None, git_username=None, git_
             # Split path and branch
             path, branch =  repo_path.split(" ")
             path = os.path.abspath(path)
+            if not os.path.exists(path):
+                logger.warning(f"Path '{path}' does not exist, skipping...")
+                continue
             logger.info(f"Processing repository '{path}' with branch '{branch}'")
 
             # Path process
