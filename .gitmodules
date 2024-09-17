@@ -7,8 +7,8 @@
 [submodule "AudioProcess"]
 	path = AudioProcess
 	url = git@github.com:luckykefu/AudioProcess.git
-[submodule "Audio2TextWhisper"]
-	path = Audio2TextWhisper
+[submodule "WhisperWebUI"]
+	path = WhisperWebUI
 	url = git@github.com:luckykefu/Audio2TextWhisperWebUI.git
 [submodule "GitAutoPush"]
 	path = GitAutoPush

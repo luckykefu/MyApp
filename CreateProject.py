@@ -1,10 +1,26 @@
 import datetime
 import os
 from src.log import get_logger
+import shutil
 
 logger = get_logger(__name__)
 
-import shutil
+
+def create_dir(dir):
+    """
+    Create the src directory in the given project.
+    """
+    os.makedirs(dir, exist_ok=True)
+    logger.info(f"Created Dir {dir} successfully")
+
+
+def create_file(file_path, content):
+    """
+    Create a file with the given content in the given path.
+    """
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    logger.info(f"Created file {file_path} successfully")
 
 
 def create_project(project_name=None, author_name=None, email=None):
@@ -24,21 +40,18 @@ def create_project(project_name=None, author_name=None, email=None):
             shutil.rmtree(project_name)
             logger.info(f"Deleted existing project {project_name}")
         logger.info("Continuing with the operation...")
-
     logger.info(f"Creating project {project_name}")
-
     #  Create project directory
-    os.makedirs(project_name, exist_ok=True)
-    logger.info(f"Project {project_name} created successfully")
+    create_dir(project_name)
 
     # Create src directory
     src_dir = os.path.join(project_name, "src")
-    os.makedirs(src_dir, exist_ok=True)
-    logger.info(f"Created src directory in {project_name}")
+    create_dir(src_dir)
+
+    # Create requirements.txt file
     # Create log.py file
     log_file = os.path.join(src_dir, "log.py")
-    if not os.path.exists(log_file):
-        log_content = f"""# log.py
+    log_content = f"""# log.py
 # --coding:utf-8--
 # Time:{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 # Author:{author_name}
@@ -95,14 +108,14 @@ if __name__ == "__main__":
     logger.error("This is an error message.")
     logger.critical("This is a critical message.")
 """
-        with open(log_file, "w") as f:
-            f.write(log_content)
-        logger.info(f"Created log.py file in {project_name}")
+    create_file(log_file, log_content)
+    # Create src/__init__.py file
+    init_file = os.path.join(src_dir, "__init__.py")
+    create_file(init_file, "")
 
     # create .gitignore file
     gitignore_file = os.path.join(project_name, ".gitignore")
-    if not os.path.exists(gitignore_file):
-        gitignore_content = """/cookies/
+    gitignore_content = """/cookies/
 /cache/
 /models/
 /.conda/
@@ -281,35 +294,28 @@ cython_debug/
 #.idea/
 
 """
-
-        with open(gitignore_file, "w") as f:
-            f.write(gitignore_content)
-        logger.info(f"Created .gitignore file in {project_name}")
+    create_file(gitignore_file, gitignore_content)
+    # Create __init__.py file
+    init_file = os.path.join(project_name, "__init__.py")
+    create_file(init_file, "")
 
     # Create README.md file
     readme_file = os.path.join(project_name, "README.md")
-    if not os.path.exists(readme_file):
-        readme_content = f"""# {project_name}
+    readme_content = f"""# {project_name}
 
 Project description goes here.
 
 """
-        with open(readme_file, "w") as f:
-            f.write(readme_content)
-        logger.info(f"Created README.md file in {project_name}")
+    create_file(readme_file, readme_content)
 
     # Create requirements.txt file
     requirements_file = os.path.join(project_name, "requirements.txt")
-    if not os.path.exists(requirements_file):
-        requirements_content = "gradio\n"
-        with open(requirements_file, "w") as f:
-            f.write(requirements_content)
-        logger.info(f"Created requirements.txt file in {project_name}")
+    requirements_content = "gradio\n"
+    create_file(requirements_file, requirements_content)
 
     # Create WebUI files
     webui_file = os.path.join(project_name, f"{project_name}WebUI.py")
-    if not os.path.exists(webui_file):
-        webui_content = f"""# {project_name}WebUI.py
+    webui_content = f"""# {project_name}WebUI.py
 # --coding:utf-8--
 # Time:{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 # Author:{author_name}
@@ -319,8 +325,15 @@ Project description goes here.
 import gradio as gr
 import argparse
 from src.log import get_logger
+import os
 
 logger = get_logger(__name__)
+
+# 获取脚本所在目录的绝对路径
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 更改当前工作目录
+os.chdir(script_dir)
 
 def main():
 
@@ -350,19 +363,24 @@ if __name__ == "__main__":
     main()
 
 """
-        with open(webui_file, "w") as f:
-            f.write(webui_content)
-        logger.info(f"Created {project_name}WebUI.py file in {project_name}")
+    create_file(webui_file, webui_content)
 
     # Create test files
-    test_file = os.path.join(project_name, f"tests{project_name}.py")
-    if not os.path.exists(test_file):
-        test_content = f"""# tests{project_name}.py
+    test_file = os.path.join(project_name, f"Test{project_name}.py")
+    test_content = f"""# {test_file}
 # --coding:utf-8--
 # Time:{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 # Author:{author_name}
 # Email:{email}
 # Description:
+
+import os
+
+# 获取脚本所在目录的绝对路径
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 更改当前工作目录
+os.chdir(script_dir)
 
 #####################################################
 # TODO: Add tests for {project_name}
@@ -374,14 +392,13 @@ if __name__ == "__main__":
 
 #####################################################
 """
-        with open(test_file, "w") as f:
-            f.write(test_content)
-        logger.info(f"Created tests{project_name}.py file in {project_name}")
+    create_file(test_file, test_content)
 
 
 if __name__ == "__main__":
+
     # Example usage:
-    project_name = "ImgProcess"
+    project_name = "000"
     author_name = "Luckykefu"
     email = "3124568493@qq.com"
 
