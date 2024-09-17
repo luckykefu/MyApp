@@ -13,3 +13,6 @@
 [submodule "GitAutoPush"]
 	path = GitAutoPush
 	url = git@github.com:luckykefu/autogit.git
+[submodule "YTBDL"]
+	path = YTBDL
+	url = git@github.com:luckykefu/ytb-dlWebUI.git

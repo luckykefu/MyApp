@@ -381,7 +381,7 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     # Example usage:
-    project_name = "GitAutoPush"
+    project_name = "YTBDL"
     author_name = "Luckykefu"
     email = "3124568493@qq.com"
 
