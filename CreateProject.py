@@ -32,15 +32,19 @@ def create_project(project_name=None, author_name=None, email=None):
         logger.error(f"Project {project_name} already exists")
 
         user_input = input("Do you want to continue? (y/n): ").strip().lower()
+
         if user_input != "y":
             logger.error("Operation cancelled by the user.")
-
             return  # 取消操作
+
         else:
             shutil.rmtree(project_name)
             logger.info(f"Deleted existing project {project_name}")
+
         logger.info("Continuing with the operation...")
+
     logger.info(f"Creating project {project_name}")
+
     #  Create project directory
     create_dir(project_name)
 
@@ -48,7 +52,6 @@ def create_project(project_name=None, author_name=None, email=None):
     src_dir = os.path.join(project_name, "src")
     create_dir(src_dir)
 
-    # Create requirements.txt file
     # Create log.py file
     log_file = os.path.join(src_dir, "log.py")
     log_content = f"""# log.py
@@ -107,8 +110,10 @@ if __name__ == "__main__":
     logger.warning("This is a warning message.")
     logger.error("This is an error message.")
     logger.critical("This is a critical message.")
+
 """
     create_file(log_file, log_content)
+
     # Create src/__init__.py file
     init_file = os.path.join(src_dir, "__init__.py")
     create_file(init_file, "")
@@ -295,6 +300,7 @@ cython_debug/
 
 """
     create_file(gitignore_file, gitignore_content)
+
     # Create __init__.py file
     init_file = os.path.join(project_name, "__init__.py")
     create_file(init_file, "")
@@ -329,11 +335,9 @@ import os
 
 logger = get_logger(__name__)
 
-# 获取脚本所在目录的绝对路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# 更改当前工作目录
 os.chdir(script_dir)
+output_dir = os.path.join(script_dir, "output")
 
 def main():
 
@@ -375,11 +379,7 @@ if __name__ == "__main__":
 # Description:
 
 import os
-
-# 获取脚本所在目录的绝对路径
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# 更改当前工作目录
 os.chdir(script_dir)
 
 #####################################################
@@ -391,6 +391,8 @@ os.chdir(script_dir)
 
 
 #####################################################
+# TODO: Add more tests for {project_name}
+
 """
     create_file(test_file, test_content)
 
@@ -398,7 +400,7 @@ os.chdir(script_dir)
 if __name__ == "__main__":
 
     # Example usage:
-    project_name = "000"
+    project_name = "MyApp"
     author_name = "Luckykefu"
     email = "3124568493@qq.com"
 

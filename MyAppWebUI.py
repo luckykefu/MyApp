@@ -94,6 +94,104 @@ def main():
         gr.Markdown("## MyApp")
         git_repo_path_state = gr.State(initial_git_repo_path)  # Store the git_repo_path
 
+        with gr.TabItem("AutoPublishWebUI"):
+            gr.Markdown("## AutoPublishWebUI")
+            gr.Markdown("### 清除gradio缓存")
+            clear_cache_btn = gr.Button("RUN", key="clear_cache")
+            clear_cache_btn.click(fn=clear_gradio_cache)
+
+            gr.Markdown("### 发布参数")
+            with gr.Row():
+
+                video_file_path = gr.Video(label="上传视频")
+
+                with gr.Column():
+                    json_file_path = gr.File(
+                        label="标题描述标签json文件", type="filepath"
+                    )
+
+                    title = gr.Textbox(label="标题", value="", lines=1)
+                    description = gr.Textbox(label="描述", value="", lines=2)
+                    tags = gr.Textbox(label="标签", value="#", lines=1)
+
+                with gr.Column():
+                    json_output_path = gr.File(
+                        label="保存标题描述标签为json文件", type="filepath"
+                    )
+
+            title.change(
+                fn=save_title_description_tags,
+                inputs=[title, description, tags],
+                outputs=[json_output_path],
+            )
+            description.change(
+                fn=save_title_description_tags,
+                inputs=[title, description, tags],
+                outputs=[json_output_path],
+            )
+            tags.change(
+                fn=save_title_description_tags,
+                inputs=[title, description, tags],
+                outputs=[json_output_path],
+            )
+
+            with gr.Row():
+                xhs_btn = gr.Button("发布到xhs")
+                zhihu_btn = gr.Button("发布到知乎")
+                bili_btn = gr.Button("发布到哔哩哔哩")
+                wb_btn = gr.Button("发布到微博")
+                dy_btn = gr.Button("发布到抖音")
+                ks_btn = gr.Button("发布到快手")
+                sph_btn = gr.Button("发布到视频号")
+                bjh_btn = gr.Button("发布到百家号")
+                vivo_btn = gr.Button("发布到Vivo号")
+
+            xhs_btn.click(
+                fn=publish_to_xhs,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            bili_btn.click(
+                fn=publish_to_blbl,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            dy_btn.click(
+                fn=publish_to_dy,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            ks_btn.click(
+                fn=publish_to_ks,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            wb_btn.click(
+                fn=publish_to_weibo,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            sph_btn.click(
+                fn=publish_to_sph,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            bjh_btn.click(
+                fn=publish_to_bjh,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            vivo_btn.click(
+                fn=publish_to_vivo,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+            zhihu_btn.click(
+                fn=publish_to_zhihu,
+                inputs=[video_file_path, title, description, tags, json_file_path],
+                outputs=[],
+            )
+
         with gr.TabItem("YTBDL"):
             gr.Markdown("## YTBDL")
             ytb_url = gr.Textbox(
@@ -290,104 +388,6 @@ def main():
                     outputs=[],
                 )
 
-        with gr.TabItem("AutoPublishWebUI"):
-            gr.Markdown("## AutoPublishWebUI")
-            gr.Markdown("### 清除gradio缓存")
-            clear_cache_btn = gr.Button("RUN", key="clear_cache")
-            clear_cache_btn.click(fn=clear_gradio_cache)
-
-            gr.Markdown("### 发布参数")
-            with gr.Row():
-
-                video_file_path = gr.Video(label="上传视频")
-
-                with gr.Column():
-                    json_file_path = gr.File(
-                        label="标题描述标签json文件", type="filepath"
-                    )
-
-                    title = gr.Textbox(label="标题", value="", lines=1)
-                    description = gr.Textbox(label="描述", value="", lines=2)
-                    tags = gr.Textbox(label="标签", value="#", lines=1)
-
-                with gr.Column():
-                    json_output_path = gr.File(
-                        label="保存标题描述标签为json文件", type="filepath"
-                    )
-
-            title.change(
-                fn=save_title_description_tags,
-                inputs=[title, description, tags],
-                outputs=[json_output_path],
-            )
-            description.change(
-                fn=save_title_description_tags,
-                inputs=[title, description, tags],
-                outputs=[json_output_path],
-            )
-            tags.change(
-                fn=save_title_description_tags,
-                inputs=[title, description, tags],
-                outputs=[json_output_path],
-            )
-
-            with gr.Row():
-                xhs_btn = gr.Button("发布到xhs")
-                zhihu_btn = gr.Button("发布到知乎")
-                bili_btn = gr.Button("发布到哔哩哔哩")
-                wb_btn = gr.Button("发布到微博")
-                dy_btn = gr.Button("发布到抖音")
-                ks_btn = gr.Button("发布到快手")
-                sph_btn = gr.Button("发布到视频号")
-                bjh_btn = gr.Button("发布到百家号")
-                vivo_btn = gr.Button("发布到Vivo号")
-
-            xhs_btn.click(
-                fn=publish_to_xhs,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            bili_btn.click(
-                fn=publish_to_blbl,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            dy_btn.click(
-                fn=publish_to_dy,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            ks_btn.click(
-                fn=publish_to_ks,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            wb_btn.click(
-                fn=publish_to_weibo,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            sph_btn.click(
-                fn=publish_to_sph,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            bjh_btn.click(
-                fn=publish_to_bjh,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            vivo_btn.click(
-                fn=publish_to_vivo,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-            zhihu_btn.click(
-                fn=publish_to_zhihu,
-                inputs=[video_file_path, title, description, tags, json_file_path],
-                outputs=[],
-            )
-
         with gr.TabItem("WhisperWebUI"):
             with gr.Row():
                 audio_file_path5 = gr.Audio(label="上传音频文件", type="filepath")
@@ -425,6 +425,7 @@ def main():
                 ],
                 outputs=[audio_recognition_output],
             )
+  
         with gr.TabItem("AudioProcess"):
             with gr.TabItem("BPM"):
                 audio_file_path2 = gr.File(label="上传音频文件", type="filepath")
@@ -498,6 +499,7 @@ def main():
                     outputs=audio_output,
                     queue=True,  # 可选
                 )
+
 
     # Launch the interface
     parser = argparse.ArgumentParser(description="Demo")
