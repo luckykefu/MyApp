@@ -138,7 +138,7 @@ if __name__ == "__main__":
     logger.warning("This is a warning message.")
     logger.error("This is an error message.")
     logger.critical("This is a critical message.")
-    
+
 """
 
 
@@ -350,21 +350,20 @@ output_dir = os.path.join(script_dir, "output")
 os.makedirs(output_dir, exist_ok=True)
 
 
-def create_interface():
+def create_interface_{project_name}():
 
     # Create and return the Gradio interface.
     with gr.Blocks() as demo:
-        with gr.TabItem("Test"):
-            gr.Markdown("## Test Interface")
-            input_text = gr.Textbox(label="Input")
-            output_text = gr.Textbox(label="Output")
-            submit_btn = gr.Button("Submit")
+        gr.Markdown("## {project_name}")
+        input_text = gr.Textbox(label="Input")
+        output_text = gr.Textbox(label="Output")
+        submit_btn = gr.Button("Submit")
 
-            def process_input(text):
-                # Example processing function
-                return f"Processed: {{text}}"
+        def process_input(text):
+            # Example processing function
+            return f"Processed: {{text}}"
 
-            submit_btn.click(fn=process_input, inputs=input_text, outputs=output_text)
+        submit_btn.click(fn=process_input, inputs=input_text, outputs=output_text)
 
     return demo
 
@@ -376,15 +375,15 @@ def parse_arguments():
     parser.add_argument(
         "--server_name", type=str, default="localhost", help="Server name"
     )
-    parser.add_argument("--server_port", type=int, default=7860, help="Server port")
+    parser.add_argument("--server_port", type=int, default=None, help="Server port")
     parser.add_argument("--root_path", type=str, default=None, help="Root path")
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
-    demo = create_interface()
-
+    with gr.Blocks() as demo:
+        create_interface_{project_name}()
     logger.info(f"Starting server on {{args.server_name}}:{{args.server_port}}")
     demo.launch(
         server_name=args.server_name,
