@@ -1,6 +1,6 @@
 import datetime
 import os
-from src.log import get_logger
+from .log import get_logger
 import shutil
 
 logger = get_logger(__name__)
