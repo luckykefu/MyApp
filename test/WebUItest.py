@@ -1,7 +1,7 @@
-# TestWebUI.py
+# testWebUI.py
 # --coding:utf-8--
-# Time:2024-09-18 18:50:43
-# Author:Luckykefu
+# Time:2024-09-19 00:31:11
+# Author:luckykefu
 # Email:3124568493@qq.com
 # Description: A simple Gradio web interface for testing purposes
 
@@ -19,39 +19,40 @@ output_dir = os.path.join(script_dir, "output")
 os.makedirs(output_dir, exist_ok=True)
 
 
-def create_interface():
-    """Create and return the Gradio interface."""
+def create_interface_test():
+
+    # Create and return the Gradio interface.
     with gr.Blocks() as demo:
-        with gr.TabItem("Test"):
-            gr.Markdown("## Test Interface")
-            input_text = gr.Textbox(label="Input")
-            output_text = gr.Textbox(label="Output")
-            submit_btn = gr.Button("Submit")
+        gr.Markdown("## test")
+        input_text = gr.Textbox(label="Input")
+        output_text = gr.Textbox(label="Output")
+        submit_btn = gr.Button("Submit")
 
-            def process_input(text):
-                # Example processing function
-                return f"Processed: {text}"
+        def process_input(text):
+            # Example processing function
+            return f"Processed: {text}"
 
-            submit_btn.click(fn=process_input, inputs=input_text, outputs=output_text)
+        submit_btn.click(fn=process_input, inputs=input_text, outputs=output_text)
 
     return demo
 
 
 def parse_arguments():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Test Web UI")
+
+    # Parse command line arguments.
+    parser = argparse.ArgumentParser(description=f"{__file__}")
     parser.add_argument(
         "--server_name", type=str, default="localhost", help="Server name"
     )
-    parser.add_argument("--server_port", type=int, default=7860, help="Server port")
+    parser.add_argument("--server_port", type=int, default=None, help="Server port")
     parser.add_argument("--root_path", type=str, default=None, help="Root path")
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
-    demo = create_interface()
-
+    with gr.Blocks() as demo:
+        create_interface_test()
     logger.info(f"Starting server on {args.server_name}:{args.server_port}")
     demo.launch(
         server_name=args.server_name,
@@ -63,3 +64,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

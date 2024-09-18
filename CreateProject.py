@@ -371,7 +371,7 @@ def create_interface_{project_name}():
 def parse_arguments():
 
     # Parse command line arguments.
-    parser = argparse.ArgumentParser(description="Test Web UI")
+    parser = argparse.ArgumentParser(description=f"{{__file__}}")
     parser.add_argument(
         "--server_name", type=str, default="localhost", help="Server name"
     )

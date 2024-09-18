@@ -1,6 +1,6 @@
 # log.py
 # --coding:utf-8--
-# Time:2024-09-18 19:48:05
+# Time:2024-09-19 00:31:11
 # Author:luckykefu
 # Email:3124568493@qq.com
 # Description: Provides colored logging functionality
@@ -51,4 +51,4 @@ if __name__ == "__main__":
     logger.warning("This is a warning message.")
     logger.error("This is an error message.")
     logger.critical("This is a critical message.")
-    
+
