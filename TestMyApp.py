@@ -6,7 +6,15 @@
 # Description:
 
 import os
+import sys
+
+# Get the absolute path of the script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Add the script's directory to the Python path
+sys.path.insert(0, script_dir)
+
+# Change the current working directory to the script's directory
 os.chdir(script_dir)
 
 #####################################################

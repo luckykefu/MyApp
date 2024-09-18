@@ -35,10 +35,12 @@ from AutoPublishVideo.src.auto_publish_video_func.vivo import publish_to_vivo
 from AutoPublishVideo.src.auto_publish import save_title_description_tags
 from AutoPublishVideo.src.clear_gradio_cache import clear_gradio_cache
 from dotenv import load_dotenv
+
 ################################################
 from ImgProcess.src.merge_images import merge_images
 from ImgProcess.src.video_to_frames import video_to_frames
 from ImgProcess.src.make_cover import make_cover
+
 #############################################
 from UpdateSubtitle.src.update_xstudio_lrc import update_xstudio_lrc
 from UpdateSubtitle.src.extract_text import extract_text
@@ -46,8 +48,10 @@ from UpdateSubtitle.src.lrc2srt import lrc2srt
 from UpdateSubtitle.src.update_srt_with_new_subtitles import (
     update_srt_with_new_subtitles,
 )
+
 #########################################################
 from YTBDL.src.download_from_youtube import download_from_youtube
+
 #################################################
 load_dotenv()
 logger = get_logger(__name__)
@@ -88,6 +92,7 @@ initial_git_repo_path = read_git_repo_path()
 
 
 def main():
+    logger.info(__file__)
 
     # Define the interface
     with gr.Blocks() as demo:
@@ -273,7 +278,9 @@ def main():
                 run_btn = gr.Button("run")
                 output_lrc = gr.Textbox(label="output_lrc", value="", lines=6)
                 run_btn.click(
-                    fn=update_xstudio_lrc, inputs=[sc_lrc, tgt_lrc], outputs=[output_lrc]
+                    fn=update_xstudio_lrc,
+                    inputs=[sc_lrc, tgt_lrc],
+                    outputs=[output_lrc],
                 )
 
         with gr.TabItem("ImgProcess"):
@@ -289,14 +296,18 @@ def main():
 
                 merged_img = gr.Image(label="合并后的图片", type="filepath")
 
-                merge_btn.click(fn=merge_images, inputs=[img1, img2], outputs=merged_img)
+                merge_btn.click(
+                    fn=merge_images, inputs=[img1, img2], outputs=merged_img
+                )
 
             with gr.TabItem("视频插帧"):
                 with gr.Row():
 
                     video_input = gr.Video(label="上传视频")
 
-                    target_fps = gr.Slider(label="目标FPS", value=25, minimum=1, maximum=60)
+                    target_fps = gr.Slider(
+                        label="目标FPS", value=25, minimum=1, maximum=60
+                    )
 
                     video_output = gr.Video(label="处理后的视频")
 
@@ -334,7 +345,9 @@ def main():
 
                     font_color = gr.ColorPicker(label="字体颜色", value="#000000")
                     output_img_fmt = gr.Dropdown(
-                        choices=["jpg", "png", "jpeg"], label="输出图片格式", value="png"
+                        choices=["jpg", "png", "jpeg"],
+                        label="输出图片格式",
+                        value="png",
                     )
                 make_cover_btn = gr.Button("make cover")
 
@@ -425,7 +438,7 @@ def main():
                 ],
                 outputs=[audio_recognition_output],
             )
-  
+
         with gr.TabItem("AudioProcess"):
             with gr.TabItem("BPM"):
                 audio_file_path2 = gr.File(label="上传音频文件", type="filepath")
@@ -499,7 +512,6 @@ def main():
                     outputs=audio_output,
                     queue=True,  # 可选
                 )
-
 
     # Launch the interface
     parser = argparse.ArgumentParser(description="Demo")

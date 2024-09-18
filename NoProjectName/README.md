@@ -1,3 +1,3 @@
-# MyApp
+# NoProjectName
 
 Project description goes here.
