@@ -8,22 +8,21 @@
 import os
 import gradio as gr
 import argparse
-
-from GitAutoPush.src.git_auto_push import git_auto_push
+from src.demo import demo_audio2wav, demo_create_project, demo_delete_path, demo_gen_pipreqs
 from src.log import get_logger
 
-logger = get_logger(__name__)
 #################
-from AudioProcess.src.demo_BPM import demo_BPM
-from AudioProcess.src.demo_split_audio_and_video import demo_split_audio_and_video
-from AudioProcess.src.demo_audio_clip import demo_audio_clip
-from AudioProcess.src.demo_edgeTTS import demo_edge_tts
+from AudioProcess.src.demo import (
+    demo_audio_clip,
+    demo_BPM,
+    demo_edge_tts,
+    demo_split_audio_and_video,
+)
 
 ####################
 from AutoPublishVideo.src.demo_autopunlish import demo_auto_publish_video
 from dotenv import load_dotenv
 
-load_dotenv()
 ################################################
 from GitAutoPush.src.demo_gitautopush import demo_gitautopush
 
@@ -40,6 +39,8 @@ from WhisperWebUI.src.demo import demo_whisper
 from YTBDL.src.demo import demo_download_from_youtube
 
 #################################################
+logger = get_logger(__name__)
+load_dotenv()
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -67,9 +68,19 @@ def main():
     # Define the interface
     with gr.Blocks() as demo:
         gr.Markdown("## MyApp")
+        with gr.TabItem("MyApp"):
+            with gr.TabItem("Audio2WAV"):
+                demo_audio2wav()
+            with gr.TabItem("Gen Pipreqs"):
+                demo_gen_pipreqs()
+            with gr.TabItem("Create Project"):
+                demo_create_project()
+            with gr.TabItem("Delete Path"):
+                demo_delete_path()
+
         with gr.TabItem("AutoPublishWebUI"):
             demo_auto_publish_video()
-    
+
         with gr.TabItem("YTBDL"):
             demo_download_from_youtube()
 
