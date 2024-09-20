@@ -29,3 +29,25 @@ def delete_path(path):
             logger.error(f"Error deleting {path}: {str(e)}")
     else:
         logger.warning(f"Path does not exist: {path}")
+
+def delete_path_in_dir(dir,path):
+    """
+    delete all dirs in given under dir
+    """
+    if not os.path.exists(dir):
+        logger.warning(f"Directory does not exist: {dir}")
+        return
+    if isinstance(path, str):
+        path_list = [path]
+    elif isinstance(path, list):
+        path_list = path
+    else:
+        logger.error("path must be a string or a list")
+        return
+    logger.info(f"Deleting path in dir: {dir}")
+    for path in path_list:
+        for root, dirs, files in os.walk(dir):
+            for directory in dirs:
+                if directory == path:
+                    delete_path(os.path.join(root, dir))
+    logger.info("Delete path in dir completed")

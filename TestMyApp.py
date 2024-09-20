@@ -30,15 +30,16 @@ logger.info("Start Testing")
 #     email = "3124568493@qq.com"
 #     create_project(project_name, author, email)
 
-# if __name__ == "__main__":
-#     from src.delete_path import delete_path
+if __name__ == "__main__":
+    from src.delete_path import *
+    paths=[
+        "Cache",
+        "Mixdown",
+        "Media",
+        "Melodyne"
+    ]
+    delete_path_in_dir(r"D:\Documents\MySyncData", paths)
 
-#     waittodel = "log.py.bak"
-#     # 找出所有log.py.bak文件并删除
-#     for root, dirs, files in os.walk(os.getcwd()):
-#         for file in files:
-#             if file == "log.py.bak":
-#                 delete_path(os.path.join(root, file))
 
 # if __name__ == "__main__":
 #     from src.update_all_log_file import update_log_files

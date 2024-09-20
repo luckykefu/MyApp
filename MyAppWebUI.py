@@ -69,7 +69,7 @@ def main():
     with gr.Blocks() as demo:
         gr.Markdown("## MyApp")
         with gr.TabItem("MyApp"):
-            with gr.TabItem("Audio2WAV"):
+            with gr.TabItem("AudioFormatConvert"):
                 demo_audio2wav()
             with gr.TabItem("Gen Pipreqs"):
                 demo_gen_pipreqs()
