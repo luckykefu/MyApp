@@ -22,6 +22,8 @@ from src.log import get_logger
 logger = get_logger(__file__)
 logger.info("Start Testing")
 
+
+
 # if __name__ == "__main__":
 #     from src.create_project import create_project
 
@@ -30,15 +32,15 @@ logger.info("Start Testing")
 #     email = "3124568493@qq.com"
 #     create_project(project_name, author, email)
 
-if __name__ == "__main__":
-    from src.delete_path import *
-    paths=[
-        "Cache",
-        "Mixdown",
-        "Media",
-        "Melodyne"
-    ]
-    delete_path_in_dir(r"D:\Documents\MySyncData", paths)
+# if __name__ == "__main__":
+#     from src.delete_path import *
+#     paths=[
+#         "Cache",
+#         "Mixdown",
+#         "Media",
+#         "Melodyne"
+#     ]
+#     delete_path_in_dir(r"D:\Documents\MySyncData", paths)
 
 
 # if __name__ == "__main__":
